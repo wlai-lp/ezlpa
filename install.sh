@@ -60,6 +60,7 @@ main() {
     # install lp.sh
     content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lp.sh")
     # modified_content="${content//echo/oche}"
+    echo $content
     modified_content=$(echo "$content" | sed "s/{{LPADir}}/$LPADir/g")    
     # save it to the output directory
     echo "$modified_content" > $LPADir/lp.sh
