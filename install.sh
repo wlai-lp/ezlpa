@@ -50,7 +50,6 @@ main() {
 
     # install lp.html and lp.sh
     content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lp.html")
-    # modified_content="${content//echo/oche}"
     modified_content=$(echo "$content" | sed "s/{{userId}}/$username/g")
     modified_content=$(echo "$modified_content" | sed "s/{{password}}/$password/g")
 
@@ -60,13 +59,23 @@ main() {
     # install lp.sh
     content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lp.sh")
     # content=$(curl -s "http://localhost:5500/lp2.sh")
-    # modified_content="${content//echo/oche}"
-    echo $content
-    echo $HOME
     modified_content=$(echo "$content" | sed "s|{{LPADir}}|$LPADir|g")    
     # save it to the output directory
     echo "$modified_content" > $LPADir/lp.sh
     # echo "$content" > $LPADir/lp.sh
+
+    # lpa.html has 3 parameters, jspuserid (no LPA- prefix), userid (LPA-specific) and password
+    # install lpa.html and lpa.sh
+    jspuserid=$(echo "$username" | cut -d'-' -f2)
+    content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lpa.html")
+    #content=$(curl -s "http://localhost:5500/lpa.html")
+    modified_content=$(echo "$content" | sed "s|{{userid}}|$username|g")
+    modified_content=$(echo "$modified_content" | sed "s/{{jspuserid}}/$jspuserid/g")
+    modified_content=$(echo "$modified_content" | sed "s/{{password}}/$password/g")
+    echo "$modified_content" > $LPADir/lpa.html
+
+
+
 
 }
 
