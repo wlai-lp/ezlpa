@@ -74,7 +74,12 @@ main() {
     modified_content=$(echo "$modified_content" | sed "s/{{password}}/$password/g")
     echo "$modified_content" > $LPADir/lpa.html
 
-
+    # install lpa.sh
+    content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lpa.sh")
+    # content=$(curl -s "http://localhost:5500/lp2.sh")
+    modified_content=$(echo "$content" | sed "s|{{LPADir}}|$LPADir|g")    
+    # save it to the output directory
+    echo "$modified_content" > $LPADir/lpa.sh
 
 
 }

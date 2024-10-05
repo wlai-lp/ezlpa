@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# NOTE: this bash script enhance the original script by accepting account alias as parameter
-# add .env to your local directory and use the following format:
-# wei=90412079
-# then do lp wei to launch 90412079
-# need to incorporate this in the cli tool
-
 # Required parameters:
 # @raycast.schemaVersion 1
 # @raycast.title lpa
@@ -18,7 +12,7 @@
 #echo "Hello World! Argument1 value: "$1""
 
 # Path to the file you want to open
-file_path="{{LPADir}}/lp.html"
+file_path="{{LPADir}}/lpa.html"
 env_file="{{LPADir}}/env.js"
 
 # read env file
