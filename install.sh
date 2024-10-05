@@ -11,6 +11,8 @@ echo "Install EzLPA!"
 
 main() {
     
+    LPADir=$HOME/tmp
+
     platform="$(uname -s)"
     arch="$(uname -m)"
     channel="${ZED_CHANNEL:-stable}"
@@ -28,7 +30,8 @@ main() {
     fi
 
     # ask for user name and password
-    # read -p "Enter your LPA username (e.g. LPA-wlai): " github_username
+    read -p "Enter your LPA username (e.g. LPA-wlai): " username
+    echo username is $username
     #  not sure why this is not working
     # read -sp "Enter your GitHub password: " github_password
 
@@ -36,7 +39,7 @@ main() {
     # Prompt for password (and mask it)
     echo -n "LAP Password (silent input): "
     stty -echo  # Disable terminal echo
-    # read password
+    read password
     stty echo  # Re-enable terminal echo
     echo  # Print a newline after password input 
     # use $password to dereference the password
@@ -45,14 +48,21 @@ main() {
     
     curl -L -o "$HOME/tmp/install.sh" https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/install.sh
 
-    content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/install.sh")
+    # install lp.html and lp.sh
+    content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lp.html")
     # modified_content="${content//echo/oche}"
-    modified_content=$(echo "$content" | sed 's/echo/oche/g')
-    
-    echo "$modified_content" > output.txt
+    modified_content=$(echo "$content" | sed "s/{{userId}}/$username/g")
+    modified_content=$(echo "$modified_content" | sed "s/{{password}}/$password/g")
 
+    # save it to the output directory
+    echo "$modified_content" > $LPADir/lp.html
 
-
+    # install lp.sh
+    content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lp.sh")
+    # modified_content="${content//echo/oche}"
+    modified_content=$(echo "$content" | sed "s/{{LPADir}}/$LPADir/g")    
+    # save it to the output directory
+    echo "$modified_content" > $LPADir/lp.sh
 
 }
 

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quick LPA</title>
+        <script src="env.js"></script>
+        <script>
+            function fetchDomain(){
+              // TODO: validate site id, sample ids with different domains 40794915, 90412079
+              console.log("site id is " + site);
+
+              let url = 'https://api.liveperson.net/api/account/' + site + '/service/baseURI?version=1.0'
+              console.log("url is " + url);
+              // Example using fetch
+              fetch(url)
+                  .then(response => {
+                      if (!response.ok) {
+                          throw new Error('Network response was not ok');
+                      }
+                      return response.json(); // Convert the response to JSON
+                  })
+                  .then(data => {
+                      console.log(data); // Handle the data
+                      // Find the baseURI for the "transporter" service
+                      const adminBaseURI = data.baseURIs.find(item => item.service === "adminArea").baseURI;
+
+                      // Output the result
+                      console.log(adminBaseURI);  // Output: "va.transporter.liveperson.net"
+
+                      // set site param
+                      const inputElement = document.getElementById("site");
+                      inputElement.value = site;
+
+                      // set endpoint param
+                      const formElement = document.getElementById("hiddenForm")
+                      // formAction = "https://va-e.c.liveperson.net/hc/s-90412079/web/mlogin/home.jsp"
+                      formAction = "https://" + adminBaseURI + "/hc/s-" + site + "/web/mlogin/home.jsp"
+                      formElement.action = formAction
+
+                      // go
+                      go()
+                  })
+                  .catch(error => {
+                      console.error('There was a problem with the fetch operation:', error);
+                  });
+            }
+
+            function go(){
+              setTimeout(function() {
+                  console.log("This message is displayed after 0.2 seconds.");
+                  document.querySelector("button#hiddenLogin").click();
+              }, 200);
+            }
+
+            window.onload = fetchDomain;
+        </script>
+    </head>
+    <body>
+        <h1>LPA to site</h1>
+        redirect.... click login if no redirect
+        <form
+            action=""
+            method="post"
+            accept-charset="UTF-8"
+            ng-hide=""
+            id="hiddenForm"
+            class="ng-pristine ng-valid"
+        >
+            <input
+                id="site"
+                type="hidden"
+                autocomplete="off"
+                name="site"
+                value="23"
+            />
+            <input
+                type="hidden"
+                autocomplete="off"
+                name="user"
+                value="weidgo2"
+            />
+            <input
+                type="hidden"
+                autocomplete="off"
+                name="pass"
+                value="sldkfjlkkv"
+            />
+            <input
+                type="hidden"
+                autocomplete="off"
+                name="lpservice"
+                value="liveEngage"
+            />
+            <input
+                type="hidden"
+                autocomplete="off"
+                name="servicepath"
+                value="a/~~accountid~~/#,~~ssokey~~"
+            />
+            <input type="hidden" autocomplete="off" name="lang" value="en-US" />
+            <input
+                type="hidden"
+                autocomplete="off"
+                name="redirectToLiveEngage"
+                value=""
+            />
+            <button
+                type="submit"
+                name="op"
+                value="Go to LiveEngage"
+                id="hiddenLogin"
+
+            >
+                Login
+            </button>
+        </form>
+    </body>
+</html>
