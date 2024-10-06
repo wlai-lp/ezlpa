@@ -30,7 +30,7 @@ main() {
     echo "start install"
     # ask for user name and password
     read -p "Enter your LPA username (e.g. LPA-wlai): " username
-    echo username is $username
+    #echo username is $username
     #  not sure why this is not working
     # read -sp "Enter your GitHub password: " github_password
 
@@ -43,9 +43,9 @@ main() {
     echo  # Print a newline after password input 
     # use $password to dereference the password
     
-    echo "Downloading EzLPA..."
+    echo "Downloading EzLPA to $LPADir..."
     
-    curl -L -o "$HOME/tmp/install.sh" https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/install.sh
+    #curl -L -o "$HOME/tmp/install.sh" https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/install.sh
 
     # install lp.html and lp.sh
     content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/lp.html")
@@ -80,7 +80,8 @@ main() {
     # save it to the output directory
     echo "$modified_content" > $LPADir/lpa.sh
 
-
+    echo "EzLPA installation complete."
+    
 }
 
 
