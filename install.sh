@@ -2,7 +2,7 @@
 set -eu
 
 # Some commands...
-echo "Install EzLPA!"
+echo "Install EzLPA!!"
 # echo "The value of MY_VARIABLE is: $MY_VARIABLE"
 
 # Downloads the latest tarball from https://zed.dev/releases and unpacks it
@@ -14,9 +14,7 @@ main() {
     LPADir=$HOME/tmp
 
     platform="$(uname -s)"
-    arch="$(uname -m)"
-    channel="${ZED_CHANNEL:-stable}"
-    temp="$(mktemp -d "/tmp/zed-XXXXXX")"
+    arch="$(uname -m)"    
 
     if [ "$platform" = "Darwin" ]; then
         platform="macos"
@@ -29,6 +27,7 @@ main() {
         exit 1
     fi
 
+    echo "start install"
     # ask for user name and password
     read -p "Enter your LPA username (e.g. LPA-wlai): " username
     echo username is $username
