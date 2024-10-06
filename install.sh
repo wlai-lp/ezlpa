@@ -11,8 +11,9 @@ echo "Install EzLPA!!"
 
 main() {
     
-    LPADir=$HOME/tmp
+    LPADir=$HOME/EzLPA
 
+    echo "start install"
     echo "create ezlpa dir $LPADir"
     mkdir -p $LPADir
 
@@ -34,7 +35,6 @@ main() {
     #     exit 1
     # fi
 
-    echo "start install"
     # ask for user name and password
     read -p "Enter your LPA username (e.g. LPA-wlai): " username
     #echo username is $username
@@ -86,6 +86,16 @@ main() {
     modified_content=$(echo "$content" | sed "s|{{LPADir}}|$LPADir|g")    
     # save it to the output directory
     echo "$modified_content" > $LPADir/lpa.sh
+
+    # check env.js file
+    file="$LPADir/env.js"
+
+    # Check if the file exists
+    if [ -e "$file" ]; then
+        echo "File '$file' exists."
+    else
+        echo "File '$file' does not exist."
+    fi
 
     echo "EzLPA installation complete."
     
