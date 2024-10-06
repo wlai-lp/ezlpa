@@ -87,12 +87,16 @@ main() {
     # save it to the output directory
     echo "$modified_content" > $LPADir/lpa.sh
 
-    # check env.js file
-    file="$LPADir/env.js"
+    # copy env.js file
+    content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/env.js")
+    echo "$content" > $LPADir/env.js
+
+    # check .env file
+    file="$LPADir/.env"
 
     # Check if the file exists
     if [ -e "$file" ]; then
-        echo "File '$file' exists."
+        echo "File '$file' exists. Skip copying"
     else
         echo "File '$file' does not exist."
     fi
