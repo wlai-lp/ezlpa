@@ -13,19 +13,19 @@ main() {
     
     LPADir=$HOME/tmp
 
-    platform="$(uname -s)"
-    arch="$(uname -m)"    
+    # platform="$(uname -s)"
+    # arch="$(uname -m)"    
 
-    if [ "$platform" = "Darwin" ]; then
-        platform="macos"
-        echo "macos platform"
-    elif [ "$platform" = "Linux" ]; then
-        platform="linux"
-        echo "linux platform"
-    else
-        echo "Unsupported platform $platform"
-        exit 1
-    fi
+    # if [ "$platform" = "Darwin" ]; then
+    #     platform="macos"
+    #     echo "macos platform"
+    # elif [ "$platform" = "Linux" ]; then
+    #     platform="linux"
+    #     echo "linux platform"
+    # else
+    #     echo "Unsupported platform $platform"
+    #     exit 1
+    # fi
 
     echo "start install"
     # ask for user name and password
