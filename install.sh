@@ -13,6 +13,14 @@ main() {
     
     LPADir=$HOME/tmp
 
+    echo "create ezlpa dir $LPADir"
+    mkdir -p $LPADIR
+
+    platform="$(uname -s)"
+    arch="$(uname -m)"
+    mkdir -p $LPADir
+
+
     # platform="$(uname -s)"
     # arch="$(uname -m)"    
 
@@ -36,7 +44,7 @@ main() {
 
     # option 2
     # Prompt for password (and mask it)
-    echo -n "LAP Password (silent input): "
+    echo "LAP Password (silent input): "
     stty -echo  # Disable terminal echo
     read password
     stty echo  # Re-enable terminal echo
