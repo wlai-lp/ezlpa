@@ -99,6 +99,8 @@ main() {
         echo "File '$file' exists. Skip copying"
     else
         echo "File '$file' does not exist."
+        content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/env.js")
+        echo "$content" > $LPADir/env.js
     fi
 
     echo "EzLPA installation complete."
