@@ -14,11 +14,10 @@ main() {
     LPADir=$HOME/tmp
 
     echo "create ezlpa dir $LPADir"
-    mkdir -p $LPADIR
+    mkdir -p $LPADir
 
     platform="$(uname -s)"
     arch="$(uname -m)"
-    mkdir -p $LPADir
 
 
     # platform="$(uname -s)"
