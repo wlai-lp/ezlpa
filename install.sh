@@ -94,13 +94,13 @@ main() {
     # check .env file
     file="$LPADir/.env"
 
-    # Check if the file exists
+    # Check if .env file exists
     if [ -e "$file" ]; then
         echo "File '$file' exists. Skip copying"
     else
-        echo "File '$file' does not exist."
-        content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/env.js")
-        echo "$content" > $LPADir/env.js
+        echo "File '$file' does not exist. copying"
+        content=$(curl -s "https://raw.githubusercontent.com/wlai-lp/ezlpa/refs/heads/main/.env")
+        echo "$content" > $LPADir/.env
     fi
 
     echo "EzLPA installation complete."
